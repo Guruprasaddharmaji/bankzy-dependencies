@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.bankzy</groupId>
+    <artifactId>bankzy-dependencies</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <name>bankzy-dependencies-bom</name>
+    <packaging>pom</packaging>
+    <url>http://maven.apache.org</url>
+
+
+    <!--
+        Spring Boot and JUnit versions are NOT managed here: consumers inherit them from
+        spring-boot-starter-parent (via springboot-bankzy-parent). Importing a second Spring Boot
+        BOM here mixes versions on the classpath.
+    -->
+    <properties>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Bankzy standard versions -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>packagecloud</id>
+            <distributionManagement>
+                <repository>
+                    <id>guruprasad-dharmaji-bankzy-release</id>
+                    <url>https://packages.buildkite.com/guruprasad-dharmaji/bankzy-release/maven2/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>guruprasad-dharmaji-bankzy-snapshot</id>
+                    <url>https://packages.buildkite.com/guruprasad-dharmaji/bankzy-snapshot/maven2/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>nexus</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>nexus-bankzy-snapshot</id>
+                    <url>http://localhost:8081/repository/bankzy-maven-snapshot/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>nexus-bankzy-release</id>
+                    <url>http://localhost:8081/repository/bankzy-maven-release/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+
+</project>
