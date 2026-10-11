@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <!-- The BOM has no dependencies to resolve, so only deploy credentials are needed -->
+    <servers>
+        <server>
+            <id>guruprasad-dharmaji-bankzy-release</id>
+            <configuration>
+                <httpHeaders>
+                    <property>
+                        <name>Authorization</name>
+                        <value>${env.PCLOUD_RELEASE}</value>
+                    </property>
+                </httpHeaders>
+            </configuration>
+        </server>
+        <server>
+            <id>guruprasad-dharmaji-bankzy-snapshot</id>
+            <configuration>
+                <httpHeaders>
+                    <property>
+                        <name>Authorization</name>
+                        <value>${env.PCLOUD_SNAPSHOT}</value>
+                    </property>
+                </httpHeaders>
+            </configuration>
+        </server>
+    </servers>
+
+</settings>
